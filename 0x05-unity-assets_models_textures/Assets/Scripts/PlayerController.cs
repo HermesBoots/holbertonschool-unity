@@ -24,14 +24,15 @@ public class PlayerController : MonoBehaviour
     protected void FixedUpdate() {
         float angle;
         KeyboardControls controls = this.GetComponent<KeyboardControls>();
-        Action jump = controls.GetAction(Actions.Jump);
+        Action jump = null;
         Rigidbody body = this.GetComponent<Rigidbody>();
         Vector3 position = body.position;
         Vector3 velocity = Vector3.zero;
 
-        this.grounded = body.velocity.y == 0;
-        if (this.grounded)
+        if (this.grounded) {
             this.jumping = false;
+            jump = controls.GetAction(Actions.Jump);
+        }
         if (this.jumping && (Time.time - this.jumpTime > 0.5 || !controls.IsHeld(Actions.Jump)))
             this.jumping = false;
 
@@ -70,6 +71,13 @@ public class PlayerController : MonoBehaviour
             velocity.y = body.velocity.y;
         body.velocity = velocity;
         body.MovePosition(position);
+    }
+
+    private void OnCollisionExit(Collision collision) {
+        this.grounded = false;
+    }
+    private void OnCollisionEnter(Collision collision) {
+        this.grounded = true;
     }
 
     /// <summary>Initialize when this game object loads.</summary>
@@ -118,7 +126,7 @@ public interface IControls
 public class KeyboardControls : MonoBehaviour, IControls
 {
     // maximum amount of time an input can be buffered
-    private const float bufferTime = 0.5f;
+    private const float bufferTime = 0.2f;
 
     // tracks which directions were previously held to make diagonals more natural
     private readonly Stack<Actions> directionStack;
@@ -179,6 +187,8 @@ public class KeyboardControls : MonoBehaviour, IControls
         Action ret;
         ret = this.queue[action];
         this.queue[action] = null;
+        if (ret != null)
+        Debug.Log(ret.time);
         return ret;
     }
 
