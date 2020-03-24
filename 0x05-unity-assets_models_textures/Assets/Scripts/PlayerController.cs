@@ -51,17 +51,21 @@ public class PlayerController : MonoBehaviour
         else if (controls.Direction == Actions.NW)
             angle += 315;
         if (controls.Direction != Actions.None) {
-            position.x += Mathf.Sin(Mathf.Deg2Rad * angle) * (this.speed / 100);
-            position.z += Mathf.Cos(Mathf.Deg2Rad * angle) * (this.speed / 100);
+            position.x += Mathf.Sin(Mathf.Deg2Rad * angle) * (this.speed / 120);
+            position.z += Mathf.Cos(Mathf.Deg2Rad * angle) * (this.speed / 120);
         }
+        if (position.y < -30)
+            position.y = 30;
 
         if ((this.grounded && jump != null && jump.pressed) || (this.jumping && controls.IsHeld(Actions.Jump))) {
             this.jumping = true;
             if (this.grounded)
                 this.jumpTime = Time.time;
             this.grounded = false;
-            velocity.y = this.speed / 200 / Time.fixedDeltaTime;
+            velocity.y = this.speed / 180 / Time.fixedDeltaTime;
         }
+        else if (Mathf.Abs(body.velocity.y) > this.terminalFalling)
+            velocity.y = Mathf.Sign(body.velocity.y) * this.terminalFalling;
         else
             velocity.y = body.velocity.y;
         body.velocity = velocity;
