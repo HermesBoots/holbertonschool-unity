@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    /// <summary>The camera attached to the player object.</summary>
+    new public GameObject camera;
+
     /// <summary>The object's normal ground speed.</summary>
     public float speed = 24f;
 
@@ -17,8 +20,9 @@ public class PlayerController : MonoBehaviour
     // when the player initiated a jump
     private float jumpTime = 0;
 
+    /// <summary>Update the physics of the player each tick.</summary>
     protected void FixedUpdate() {
-        const float pythag = 0.7071067690849304f;
+        float angle;
         KeyboardControls controls = this.GetComponent<KeyboardControls>();
         Action jump = controls.GetAction(Actions.Jump);
         Rigidbody body = this.GetComponent<Rigidbody>();
@@ -31,26 +35,24 @@ public class PlayerController : MonoBehaviour
         if (this.jumping && (Time.time - this.jumpTime > 0.5 || !controls.IsHeld(Actions.Jump)))
             this.jumping = false;
 
-        if (controls.Direction == Actions.N)
-            position.z += this.speed / 100;
-        else if (controls.Direction == Actions.NE) {
-            position.z += this.speed * pythag / 100;
-            position.x += this.speed * pythag / 100;
-        } else if (controls.Direction == Actions.E)
-            position.x += this.speed / 100;
-        else if (controls.Direction == Actions.SE) {
-            position.z -= this.speed * pythag / 100;
-            position.x += this.speed * pythag / 100;
-        } else if (controls.Direction == Actions.S)
-            position.z -= this.speed / 100;
-        else if (controls.Direction == Actions.SW) {
-            position.z -= this.speed * pythag / 100;
-            position.x -= this.speed * pythag / 100;
-        } else if (controls.Direction == Actions.W)
-            position.x -= this.speed / 100;
-        else if (controls.Direction == Actions.NW) {
-            position.z += this.speed * pythag / 100;
-            position.x -= this.speed * pythag / 100;
+        angle = this.camera.transform.rotation.eulerAngles.y;
+        if (controls.Direction == Actions.NE)
+            angle += 45;
+        else if (controls.Direction == Actions.E)
+            angle += 90;
+        else if (controls.Direction == Actions.SE)
+            angle += 135;
+        else if (controls.Direction == Actions.S)
+            angle += 180;
+        else if (controls.Direction == Actions.SW)
+            angle += 225;
+        else if (controls.Direction == Actions.W)
+            angle += 270;
+        else if (controls.Direction == Actions.NW)
+            angle += 315;
+        if (controls.Direction != Actions.None) {
+            position.x += Mathf.Sin(Mathf.Deg2Rad * angle) * (this.speed / 100);
+            position.z += Mathf.Cos(Mathf.Deg2Rad * angle) * (this.speed / 100);
         }
 
         if ((this.grounded && jump != null && jump.pressed) || (this.jumping && controls.IsHeld(Actions.Jump))) {
@@ -62,7 +64,6 @@ public class PlayerController : MonoBehaviour
         }
         else
             velocity.y = body.velocity.y;
-        Debug.Log(velocity);
         body.velocity = velocity;
         body.MovePosition(position);
     }
@@ -75,11 +76,13 @@ public class PlayerController : MonoBehaviour
 }
 
 
+/// <summary>The different actions available to the player.</summary>
 public enum Actions
 {
     None, N, E, S, W, NE, SE, SW, NW, Jump
 }
 
+/// <summary>Contains information about a player-triggered action.</summary>
 public class Action
 {
     public Actions action;
@@ -89,6 +92,7 @@ public class Action
 }
 
 
+/// <summary>Contains methods and properties used for all kinds of controls (mobile/keyboard).</summary>
 public interface IControls
 {
     /// <summary>Get which direction is currently held, since multiple can be held at once.</summary>
@@ -106,6 +110,7 @@ public interface IControls
 }
 
 
+/// <summary>Implementation of keyboard controls.</summary>
 public class KeyboardControls : MonoBehaviour, IControls
 {
     // maximum amount of time an input can be buffered
