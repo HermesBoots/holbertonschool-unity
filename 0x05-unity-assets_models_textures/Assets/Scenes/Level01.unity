@@ -866,6 +866,7 @@ GameObject:
   - component: {fileID: 817775506}
   - component: {fileID: 817775505}
   - component: {fileID: 817775504}
+  - component: {fileID: 817775508}
   m_Layer: 0
   m_Name: WinFlag
   m_TagString: Untagged
@@ -884,7 +885,7 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.7
-  m_Height: 1
+  m_Height: 6
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &817775505
@@ -946,6 +947,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &817775508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 817775503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09956ee38dce0524696eaa2dff410978, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &852188622
 GameObject:
   m_ObjectHideFlags: 0
@@ -1322,6 +1335,7 @@ GameObject:
   - component: {fileID: 976394495}
   - component: {fileID: 976394494}
   - component: {fileID: 976394493}
+  - component: {fileID: 976394497}
   m_Layer: 0
   m_Name: TimerTrigger
   m_TagString: Untagged
@@ -1337,7 +1351,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 976394492}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -1401,6 +1415,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &976394497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 976394492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dacd8f431d8f00f4099b52eea30547a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1092941940
 GameObject:
   m_ObjectHideFlags: 0
