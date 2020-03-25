@@ -126,7 +126,7 @@ public interface IControls
 public class KeyboardControls : MonoBehaviour, IControls
 {
     // maximum amount of time an input can be buffered
-    private const float bufferTime = 0.2f;
+    private const float bufferTime = 0.3f;
 
     // tracks which directions were previously held to make diagonals more natural
     private readonly Stack<Actions> directionStack;
