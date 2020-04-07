@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 /// <summary>Manages the pause menu.</summary>
@@ -11,6 +10,18 @@ public class PauseMenu : MonoBehaviour
 
     // saved Time.timeScale value
     private float timeScale;
+
+    /// <summary>Load the main menu.</summary>
+    public void MainMenu() {
+        Time.timeScale = this.timeScale;
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    /// <summary>Load the options menu.</summary>
+    public void Options() {
+        Time.timeScale = this.timeScale;
+        OptionsMenu.MyLoadScene("Options");
+    }
 
     /// <summary>Toggle the pause menu.</summary>
     public void Pause() {
@@ -27,6 +38,12 @@ public class PauseMenu : MonoBehaviour
             this.timeScale = Time.timeScale;
             Time.timeScale = 0;
         }
+    }
+
+    /// <summary>Reload the current scene.</summary>
+    public void Restart() {
+        Time.timeScale = this.timeScale;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     // Check for the user to activate the menu.
