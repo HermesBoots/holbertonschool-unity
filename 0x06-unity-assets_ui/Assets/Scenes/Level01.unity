@@ -1065,6 +1065,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1890819378}
   m_PrefabAsset: {fileID: 0}
+--- !u!223 &648481406 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 3997045204002909560, guid: fe5025a317528194b89631bf61ccfb39,
+    type: 3}
+  m_PrefabInstance: {fileID: 3997045204236161692}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &657143006
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1299,6 +1305,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 1475395057}
+--- !u!114 &811803483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 811803481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86696ad49c47ac54aa3f6fdf04010ade, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseMenu: {fileID: 648481406}
 --- !u!1 &817775503
 GameObject:
   m_ObjectHideFlags: 0
@@ -2919,6 +2938,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PauseCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 3997045205573921428, guid: fe5025a317528194b89631bf61ccfb39,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 811803483}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe5025a317528194b89631bf61ccfb39, type: 3}
 --- !u!1001 &8476021098997883989
