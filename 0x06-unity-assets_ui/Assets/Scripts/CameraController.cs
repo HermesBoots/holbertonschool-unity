@@ -30,18 +30,20 @@ public class CameraController : MonoBehaviour
         if (Input.GetMouseButtonDown(1)) {
             this.mousePos = Input.mousePosition;
         } else if (Input.GetMouseButton(1)) {
-            angle.x = (Input.mousePosition.x - this.mousePos.x) / Screen.width * 180;
+            angle.y = (Input.mousePosition.x - this.mousePos.x) / Screen.width * 180;
+            angle.x = (Input.mousePosition.y - this.mousePos.y) / Screen.height * 180;
             this.mousePos = Input.mousePosition;
-            angle.y = (Input.mousePosition.y - this.mousePos.y) / Screen.height * 180;
-            angle.y *= this.isInverted ? -1 : 1;
-            this.transform.Rotate(angle, Space.World);
+            angle.x *= this.isInverted ? -1 : 1;
+            this.transform.Rotate(new Vector3(0, angle.y), Space.World);
+            if (Mathf.Abs(this.transform.rotation.eulerAngles.x % 90 + angle.x) < 90)
+                this.transform.Rotate(new Vector3(angle.x, 0), Space.Self);
         }
 
         angle = this.transform.rotation.eulerAngles;
-        position.x = player.x + Mathf.Sin(Mathf.Deg2Rad * angle.x) * -6.25f;
-        position.y = player.y + Mathf.Sin(Mathf.Deg2Rad * angle.y) * -6.25f;
+        position.x = player.x + Mathf.Sin(Mathf.Deg2Rad * angle.y) * -6.25f;
+        position.y = player.y + Mathf.Sin(Mathf.Deg2Rad * -angle.x) * -6.25f;
         position.y += 1.25f;
-        position.z = player.z + Mathf.Cos(Mathf.Deg2Rad * angle.x) * -6.25f;
+        position.z = player.z + Mathf.Cos(Mathf.Deg2Rad * angle.y) * -6.25f;
         this.transform.position = position;
     }
 }
