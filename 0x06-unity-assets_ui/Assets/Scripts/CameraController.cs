@@ -35,7 +35,9 @@ public class CameraController : MonoBehaviour
             this.mousePos = Input.mousePosition;
             angle.x *= this.isInverted ? -1 : 1;
             this.transform.Rotate(new Vector3(0, angle.y), Space.World);
-            if (Mathf.Abs(this.transform.rotation.eulerAngles.x % 90 + angle.x) < 90)
+            float testValue = this.transform.rotation.eulerAngles.x;
+            testValue -= testValue > 180 ? 360 : 0;
+            if (Mathf.Abs(testValue + angle.x) < 90)
                 this.transform.Rotate(new Vector3(angle.x, 0), Space.Self);
         }
 
