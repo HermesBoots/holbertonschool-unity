@@ -54,6 +54,11 @@ public class PlayerController : MonoBehaviour
         if (controls.Direction != Actions.None) {
             position.x += Mathf.Sin(Mathf.Deg2Rad * angle) * (this.speed / 120);
             position.z += Mathf.Cos(Mathf.Deg2Rad * angle) * (this.speed / 120);
+            this.transform.GetChild(0).rotation = Quaternion.Euler(new Vector3(
+                this.transform.GetChild(0).rotation.eulerAngles.x,
+                angle,
+                this.transform.GetChild(0).rotation.eulerAngles.z
+            ));
         }
         if (position.y < -30)
             position.y = 30;
