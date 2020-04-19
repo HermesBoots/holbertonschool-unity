@@ -71,6 +71,7 @@ public class PlayerController : MonoBehaviour
             if (this.grounded)
                 this.jumpTime = Time.time;
             this.grounded = false;
+            this.GetComponentInChildren<Animator>().SetBool("jumping", true);
             velocity.y = this.speed / 180 / Time.fixedDeltaTime;
         }
         else if (Mathf.Abs(body.velocity.y) > this.terminalFalling)
@@ -83,9 +84,11 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionExit(Collision collision) {
         this.grounded = false;
+        this.GetComponentInChildren<Animator>().SetBool("jumping", true);
     }
     private void OnCollisionEnter(Collision collision) {
         this.grounded = true;
+        this.GetComponentInChildren<Animator>().SetBool("jumping", false);
     }
 
     /// <summary>Initialize when this game object loads.</summary>
