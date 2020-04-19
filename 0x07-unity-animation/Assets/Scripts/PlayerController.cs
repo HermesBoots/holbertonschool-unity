@@ -31,10 +31,15 @@ public class PlayerController : MonoBehaviour
 
         if (this.grounded) {
             this.jumping = false;
+            this.GetComponentInChildren<Animator>().SetBool("jumping", false);
+            this.GetComponentInChildren<Animator>().SetBool("falling", false);
             jump = controls.GetAction(Actions.Jump);
         }
-        if (this.jumping && (Time.time - this.jumpTime > 0.5 || !controls.IsHeld(Actions.Jump)))
+        if (this.jumping && (Time.time - this.jumpTime > 0.5 || !controls.IsHeld(Actions.Jump))) {
             this.jumping = false;
+            this.GetComponentInChildren<Animator>().SetBool("jumping", false);
+            this.GetComponentInChildren<Animator>().SetBool("falling", true);
+        }
 
         angle = this.camera.transform.rotation.eulerAngles.y;
         if (controls.Direction == Actions.NE)
@@ -59,7 +64,8 @@ public class PlayerController : MonoBehaviour
                 angle,
                 this.transform.GetChild(0).rotation.eulerAngles.z
             ));
-            this.GetComponentInChildren<Animator>().SetBool("running", true);
+            if (this.grounded)
+                this.GetComponentInChildren<Animator>().SetBool("running", true);
         }
         else
             this.GetComponentInChildren<Animator>().SetBool("running", false);
@@ -84,10 +90,12 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionExit(Collision collision) {
         this.grounded = false;
-        this.GetComponentInChildren<Animator>().SetBool("jumping", true);
+        if (!this.jumping)
+            this.GetComponentInChildren<Animator>().SetBool("falling", true);
     }
     private void OnCollisionEnter(Collision collision) {
         this.grounded = true;
+        this.GetComponentInChildren<Animator>().SetBool("falling", false);
         this.GetComponentInChildren<Animator>().SetBool("jumping", false);
     }
 
