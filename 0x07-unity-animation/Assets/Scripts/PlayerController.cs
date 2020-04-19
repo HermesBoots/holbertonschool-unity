@@ -59,7 +59,10 @@ public class PlayerController : MonoBehaviour
                 angle,
                 this.transform.GetChild(0).rotation.eulerAngles.z
             ));
+            this.GetComponentInChildren<Animator>().SetBool("running", true);
         }
+        else
+            this.GetComponentInChildren<Animator>().SetBool("running", false);
         if (position.y < -30)
             position.y = 30;
 
