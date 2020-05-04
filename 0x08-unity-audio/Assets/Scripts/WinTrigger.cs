@@ -16,5 +16,6 @@ public class WinTrigger : MonoBehaviour
             this.winScreen.gameObject.SetActive(true);
             GameObject.Find("Player").GetComponent<Timer>().Win();
         }
+        GameObject.Find("Main Camera").GetComponent<AudioSource>().Stop();
     }
 }
