@@ -1748,6 +1748,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   winScreen: {fileID: 1028859128}
+  winSound: {fileID: 8300000, guid: cdfbb6071edf9244b88945934611ea33, type: 3}
 --- !u!223 &829358392 stripped
 Canvas:
   m_CorrespondingSourceObject: {fileID: 7000304586446242955, guid: 6a3fba6f7385d8547839eb4644f48855,
