@@ -1,10 +1,16 @@
 ﻿using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
 
 /// <summary>Manages the pause menu.</summary>
 public class PauseMenu : MonoBehaviour
 {
+    /// <summary>Audio effect to play while paused</summary>
+    public AudioMixerSnapshot soundPaused;
+    /// <summary>Audio effect to playe when not paused.</summary>
+    public AudioMixerSnapshot soundUnpaused;
+
     /// <summary>The stage's pause menu.</summary>
     public Canvas pauseMenu;
 
@@ -30,6 +36,7 @@ public class PauseMenu : MonoBehaviour
             this.GetComponent<Timer>().enabled = true;
             this.GetComponent<PlayerController>().enabled = true;
             Time.timeScale = this.timeScale;
+            this.soundUnpaused.TransitionTo(0);
         }
         else {
             this.pauseMenu.gameObject.SetActive(true);
@@ -37,6 +44,7 @@ public class PauseMenu : MonoBehaviour
             this.GetComponent<PlayerController>().enabled = false;
             this.timeScale = Time.timeScale;
             Time.timeScale = 0;
+            this.soundPaused.TransitionTo(0);
         }
     }
 

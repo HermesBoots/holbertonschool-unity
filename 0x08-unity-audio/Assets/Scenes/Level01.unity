@@ -3558,6 +3558,16 @@ PrefabInstance:
       propertyPath: pauseMenu
       value: 
       objectReference: {fileID: 648481406}
+    - target: {fileID: 811803483, guid: 14b8ba08fe941ef41a15975f7c38d9fb, type: 3}
+      propertyPath: soundUnpaused
+      value: 
+      objectReference: {fileID: 24500006, guid: 1040eddd5e6bc4f408acaf0c91e3170f,
+        type: 2}
+    - target: {fileID: 811803483, guid: 14b8ba08fe941ef41a15975f7c38d9fb, type: 3}
+      propertyPath: soundPaused
+      value: 
+      objectReference: {fileID: 245354974626181716, guid: 1040eddd5e6bc4f408acaf0c91e3170f,
+        type: 2}
     - target: {fileID: 1234486522245050719, guid: 14b8ba08fe941ef41a15975f7c38d9fb,
         type: 3}
       propertyPath: m_LocalPosition.x
