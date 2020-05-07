@@ -206,8 +206,6 @@ public class KeyboardControls : MonoBehaviour, IControls
         Action ret;
         ret = this.queue[action];
         this.queue[action] = null;
-        if (ret != null)
-        Debug.Log(ret.time);
         return ret;
     }
 

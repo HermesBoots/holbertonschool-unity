@@ -15,19 +15,23 @@ public class AudioLanding : StateMachineBehaviour
         RaycastHit cast;
         MeshRenderer model;
         AudioClip clip = null;
+        AudioSource audio = player.GetComponent<AudioSource>();
 
+        if (audio.isPlaying || audio.outputAudioMixerGroup.name.Equals("Landing"))
+            return;
         Physics.Raycast(player.transform.position, new Vector3(0, -1, 0), out cast);
         if (cast.collider) {
             model = cast.collider.gameObject.GetComponentInChildren<MeshRenderer>();
             if (model) {
-                if (Enumerable.Contains(model.materials.Select((mat) => { return mat.name; }), "Green_leafs (Instance)"))
-                    clip = this.clips[0];
-                else
+                foreach (Material mat in model.materials) {
+                    if (mat.name.Contains("eafs (Instance"))
+                        clip = this.clips[0];
+                }
+                if (clip == null)
                     clip = this.clips[1];
             }
         }
         if (clip) {
-            AudioSource audio = player.GetComponent<AudioSource>();
             audio.clip = clip;
             audio.outputAudioMixerGroup = this.mixer;
             audio.Play();
