@@ -2581,7 +2581,7 @@ GameObject:
   - component: {fileID: 1375446925}
   - component: {fileID: 1375446924}
   m_Layer: 0
-  m_Name: BGM
+  m_Name: CheeryMonday
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -31,12 +31,6 @@ public class AudioRunning : StateMachineBehaviour
         if (cast.collider) {
             model = cast.collider.gameObject.GetComponentInChildren<MeshRenderer>();
             if (model) {
-                foreach (Material mat in model.materials) {
-                    if (mat.name.Contains("eafs (Instance")) 
-                        clip = this.clips[0];
-                }
-                if (clip == null)
-                    clip = this.clips[1];
             }
         }
         if (!clip) return;
